@@ -1,9 +1,10 @@
 require_relative "hangman/game"
 require_relative "hangman/ai"
+require_relative "hangman/cli"
 
 module Hangman
   def self.run
-    game = Game.load
+    game = CLI.load_game? ? Game.load : Game.new
 
     if game.word.nil?
       begin
@@ -12,6 +13,6 @@ module Hangman
         retry
       end
     end
-    
+
   end
 end
