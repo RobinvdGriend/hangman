@@ -17,9 +17,17 @@ module Hangman
     end
 
     def initialize
-      @word = ""
+      @word = nil
       @guesses = []
       @tries = 0
+    end
+
+    def set_word(word)
+      if (5..12).include?(word.length)
+        @word = word
+      else
+        raise "Invalid word length. Must be between 5 and 12 characters long"
+      end
     end
   end
 end
