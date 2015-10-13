@@ -2,6 +2,8 @@ require 'yaml'
 
 module Hangman
   class Game
+    attr_reader :word
+
     SAVE_PATH = "save.txt"
 
     def self.load

@@ -5,10 +5,13 @@ module Hangman
   def self.run
     game = Game.load
 
-    begin
-      game.set_word(AI.generate_from_dictionary)
-    rescue
-      retry
+    if game.word.nil?
+      begin
+        game.set_word(AI.generate_from_dictionary)
+      rescue
+        retry
+      end
     end
+    
   end
 end
