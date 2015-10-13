@@ -20,6 +20,12 @@ module Hangman
       end
     end
 
+    def self.clean_save
+      File.open("save.txt", "w") do |f|
+        f.puts YAML.dump(Game.new)
+      end
+    end
+
     def save
       File.open("save.txt", "w") do |f|
         f.puts YAML.dump(self)

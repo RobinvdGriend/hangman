@@ -18,7 +18,7 @@ module Hangman
       CLI.print_correct_letters(word: game.word, letters: game.correct_guesses)
       CLI.print_incorrect_letters(letters: game.incorrect_guesses)
       CLI.print_tries_left(tries_left: game.tries_left)
-      
+
       input = CLI.take_guess
 
       if input == :save
@@ -30,9 +30,17 @@ module Hangman
           game.enter_guess(input)
         rescue => e
           puts e.message
+          puts
         end
       end
-    end
 
+      if game.won?
+        CLI.print_won
+      elsif game.lost?
+        CLI.print_lost
+      end
+    end
+    Game.clean_save
+    self.run if CLI.play_again?
   end
 end

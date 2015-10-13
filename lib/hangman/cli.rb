@@ -4,7 +4,7 @@ module Hangman
     FALSE_ANSWERS = ["no", "nope", "n"]
 
     SAVE_COMMANDS = ["save"]
-    QUIT_COMMANDS = ["quit", "q", "exit"]
+    QUIT_COMMANDS = ["quit", "exit"]
 
     def self.print_correct_letters(args)
       letters = args.fetch(:letters, [])
@@ -33,6 +33,31 @@ module Hangman
 
       puts "You have #{tries_left} incorrect tries left!"
       puts
+    end
+
+    def self.print_won
+      puts "Congratulations! You guessed the word."
+    end
+
+    def self.print_lost
+      puts "Aaaah you failed. You used up all your tries before guessing the word"
+    end
+
+    def self.play_again?
+      print "Would you like to play again? (Y/N)"
+
+      loop do
+        answer = gets.chomp.downcase
+        puts
+
+        if TRUE_ANSWERS.include?(answer)
+          return true
+        elsif FALSE_ANSWERS.include?(answer)
+          return false
+        else
+          print "Invalid input: please enter 'Y' or 'N':"
+        end
+      end
     end
 
     def self.load_game?
