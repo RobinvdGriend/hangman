@@ -49,7 +49,7 @@ module Hangman
     end
 
     def won?
-      correct_guesses.size == word.size
+      word.each_char.all? { |c| guesses.include?(c) }
     end
 
     def lost?
