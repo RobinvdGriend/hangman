@@ -6,6 +6,35 @@ module Hangman
     SAVE_COMMANDS = ["save"]
     QUIT_COMMANDS = ["quit", "q", "exit"]
 
+    def self.print_correct_letters(args)
+      letters = args.fetch(:letters, [])
+      word = args.fetch(:word)
+
+      word.each_char do |c|
+        if letters.include? c
+          print "#{c.upcase}"
+        else
+          print "_"
+        end
+      end
+      print "\n"
+    end
+
+    def self.print_incorrect_letters(args)
+      letters = args.fetch(:letters, [])
+
+      print "Letters guessed:"
+      letters.each { |l| print "#{l.upcase} " }
+      print "\n"
+    end
+
+    def self.print_tries_left(args)
+      tries_left = args.fetch(:tries_left)
+
+      puts "You have #{tries_left} incorrect tries left!"
+      puts
+    end
+
     def self.load_game?
       print "Would you like to continue from a previous saved game? (Y/N)"
 

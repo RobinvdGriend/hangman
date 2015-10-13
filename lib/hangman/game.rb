@@ -2,9 +2,9 @@ require 'yaml'
 
 module Hangman
   class Game
+    attr_reader :tries_left
     attr_reader :word
     attr_reader :guesses
-    attr_reader :tries_left
 
     SAVE_PATH = "save.txt"
 
@@ -37,6 +37,9 @@ module Hangman
       raise "This guess has already been entered" if guesses.include?(guess)
 
       guesses << guess
+      if incorrect_guesses.include?(guess)
+        lose_try
+      end
     end
 
 
@@ -61,7 +64,13 @@ module Hangman
     end
 
     def incorrect_guesses
-      word.each_char.reject { |c| guesses.include?(c) }
+      guesses.reject { |c| correct_guesses.include?(c) }
+    end
+
+    private
+
+    def lose_try
+      @tries_left -= 1
     end
   end
 end

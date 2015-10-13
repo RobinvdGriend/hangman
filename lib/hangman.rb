@@ -15,6 +15,10 @@ module Hangman
     end
 
     until game.won? || game.lost?
+      CLI.print_correct_letters(word: game.word, letters: game.correct_guesses)
+      CLI.print_incorrect_letters(letters: game.incorrect_guesses)
+      CLI.print_tries_left(tries_left: game.tries_left)
+      
       input = CLI.take_guess
 
       if input == :save
